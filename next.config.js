@@ -6,6 +6,7 @@ module.exports = {
       "gifimage.net",
       "external-content.duckduckgo.com",
       "media1.tenor.com",
+      "c.tenor.com",
     ],
   },
 };

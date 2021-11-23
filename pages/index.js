@@ -1,9 +1,10 @@
 import BlogCard from "../components/blogCard";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import Image from "next/image";
 
 const axiosInit = axios.create({
-  baseURL: "http://localhost:3001",
+  baseURL: "https://sheltered-hollows-40615.herokuapp.com/",
 });
 
 const handleApi = (action1) => {
@@ -43,9 +44,7 @@ const Home = () => {
     handleApi(setData);
   }, []);
 
-  return blogData.length === 0 ? (
-    <h1>Loading...</h1>
-  ) : (
+  return (
     <>
       <div className="flex justify-center items-center font-bold text-[40px] m-4">
         Welcome to the Blog
@@ -67,7 +66,12 @@ const Home = () => {
             ))}
           </span>
         ) : (
-          "Loding..."
+          <Image
+            src="https://c.tenor.com/5o2p0tH5LFQAAAAi/hug.gif"
+            width="100"
+            height="100"
+            className="object-contain max-w-sm rounded-t-md"
+          />
         )}
       </span>
       {/* <span className="flex justify-center items-center space-x-9 mt-16">
