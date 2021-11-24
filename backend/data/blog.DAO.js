@@ -27,6 +27,17 @@ export default class BlogDB {
     return cursor.toArray();
   }
 
+  static async getBlogById(id) {
+    let cursor;
+    try {
+      cursor = await blogData.find({ id: id });
+    } catch (e) {
+      console.error(`internal error: ${e}`);
+      return null;
+    }
+    return cursor.toArray();
+  }
+
   /**
    * TODO: Implement getBlogByID()
    * - get the data of the specific blog

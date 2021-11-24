@@ -1,6 +1,7 @@
 import Image from "next/image";
+import Link from "next/link";
 
-const BlogCard = ({ title, smallDes, img, author }) => {
+const BlogCard = ({ id, title, smallDes, img, author }) => {
   return (
     <>
       <div className="max-w-md flex flex-col  shadow-lg rounded-xl">
@@ -16,9 +17,11 @@ const BlogCard = ({ title, smallDes, img, author }) => {
           <span className=" text-sm">{smallDes}</span>
           <span className="italic text-gray-500 text-sm">{author}</span>
           <span className="pt-4">
-            <button className="bg-green-500 text-white font-semibold p-2 rounded-md shadow-lg hover:bg-green-600 hover:shadow-xl transition duration-200">
-              Read more
-            </button>
+            <Link href={`/blog/${id}`}>
+              <button className="bg-green-500 text-white font-semibold p-2 rounded-md shadow-lg hover:bg-green-600 hover:shadow-xl transition duration-200">
+                Read more
+              </button>
+            </Link>
           </span>
         </span>
       </div>
