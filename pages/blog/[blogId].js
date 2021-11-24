@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 const axiosInit = axios.create({
-  baseURL: "http://localhost:8000/",
+  baseURL: "https://sheltered-hollows-40615.herokuapp.com/",
 });
 
 const handleApi = async (id, action) => {
