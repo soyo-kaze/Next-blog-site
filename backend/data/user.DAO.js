@@ -22,7 +22,7 @@ export default class UsersDB {
     }
   }
 
-  static async compareUserPass(pass, userId) {
+  static async compareUserPass(userId) {
     let cursor;
     try {
       cursor = await usersData.find(
