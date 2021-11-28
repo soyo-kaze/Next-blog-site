@@ -37,10 +37,4 @@ export default class BlogDB {
     }
     return cursor.toArray();
   }
-
-  /**
-   * TODO: Implement getBlogByID()
-   * - get the data of the specific blog
-   * - the id will be 'id' not '_id'
-   * */
 }

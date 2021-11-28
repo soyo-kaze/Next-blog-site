@@ -2,6 +2,7 @@ import BlogCard from "../components/blogCard";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import { InfoProvider } from "../components/dataContext";
 
 const axiosInit = axios.create({
   baseURL: "https://sheltered-hollows-40615.herokuapp.com/",
@@ -19,6 +20,7 @@ const handleApi = (action1) => {
 const Home = () => {
   const [blogData, setData] = useState([]);
   const [newKey, setNewKey] = useState([]);
+  const hello = InfoProvider();
 
   // divides the data into 2-d array of 3 elements in each row.
   useEffect(() => {
@@ -45,8 +47,9 @@ const Home = () => {
 
   return (
     <>
+      <div className="h-[60px]"></div>
       <div className="flex justify-center items-center font-bold text-[40px] m-4">
-        Welcome to the Blog
+        {`Welcome to the Blog`}
       </div>
       <span className="flex  justify-center items-center p-10">
         {blogData.length !== 0 ? (

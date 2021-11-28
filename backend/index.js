@@ -3,7 +3,9 @@ import dot from "dotenv";
 dot.config();
 import { MongoClient } from "mongodb";
 import blogRouter from "./routes/blog.route.js";
+import userRouter from "./routes/user.route.js";
 import BlogDB from "./data/blog.DAO.js";
+import UsersDB from "./data/user.DAO.js";
 
 const PORT = process.env.PORT || 8000;
 
@@ -20,6 +22,7 @@ app.use(function (req, res, next) {
 });
 
 app.use("/blog", blogRouter);
+app.use("/user", userRouter);
 
 app.get("/", (req, res) => {
   res.send("Hello World");
@@ -31,6 +34,7 @@ MongoClient.connect(process.env.MONGO_URI, {
 })
   .then(async (client) => {
     await BlogDB.injectDB(client);
+    await UsersDB.injectDB(client);
     app.listen(PORT, () => {
       console.log(`hello world at ${PORT}`);
     });
