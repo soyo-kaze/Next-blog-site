@@ -2,7 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
 const axiosInit = axios.create({
-  baseURL: "http://localhost:8000",
+  baseURL: "https://sheltered-hollows-40615.herokuapp.com/",
 });
 
 const SignUp = () => {
