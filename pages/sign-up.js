@@ -1,10 +1,30 @@
 import { useState } from "react";
+import axios from "axios";
+import { useRouter } from "next/router";
+const axiosInit = axios.create({
+  baseURL: "http://localhost:8000",
+});
 
 const SignUp = () => {
   const [user, setUser] = useState({ username: "", pass: "", name: "" });
-  const handleForm = (e) => {
+  const router = useRouter();
+
+  const handleForm = async (e) => {
     e.preventDefault();
-    console.log(user);
+    const {
+      data: { data: isAdded },
+    } = await axiosInit.post("/user/add-user", {
+      name: user.name,
+      _id: user.username,
+      password: user.pass,
+    });
+    if (isAdded.success) {
+      console.log("success");
+      router.push("/");
+    } else {
+      console.log(`Not Successful. Message: ${isAdded.message}`);
+    }
+    console.log(isAdded);
   };
   return (
     <>

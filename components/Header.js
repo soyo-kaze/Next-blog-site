@@ -1,20 +1,33 @@
 import Link from "next/link";
+import { useEffect } from "react";
+import { InfoProvider } from "./dataContext";
 
 const Header = () => {
+  const [state, dispatch] = InfoProvider();
+  const handleSignOut = () => {
+    dispatch({ type: "USER_LOGOUT" });
+  };
   return (
     <>
-      <div className="p-4 w-full fixed flex items-center justify-between">
+      <div className="p-4 w-full fixed flex items-center justify-between bg-gray-200 z-20">
         <Link href="/">
           <div className="cursor-pointer">BlogSite</div>
         </Link>
+        <p>{state.user ? state.user.name : ""}</p>
         <div className="flex space-x-2">
-          <Link href="/login">
-            <span className="p-2 cursor-pointer text-white bg-green-500 rounded-md">
-              Login
+          <Link href={!state.user ? "/login" : ""}>
+            <span
+              className="p-2 cursor-pointer text-white bg-green-500 rounded-md"
+              onClick={handleSignOut}
+            >
+              {!state.user ? "Login" : "Logout"}
             </span>
           </Link>
           <Link href="/sign-up">
-            <span className="p-2 cursor-pointer text-white bg-blue-500 rounded-md">
+            <span
+              className="p-2 cursor-pointer text-white bg-blue-500 rounded-md"
+              hidden={state.user == null ? false : true}
+            >
               SignUp
             </span>
           </Link>

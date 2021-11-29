@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
+import { InfoProvider } from "../components/dataContext";
 const axiosInit = axios.create({
   baseURL: "https://sheltered-hollows-40615.herokuapp.com/",
 });
@@ -9,6 +10,8 @@ const Login = () => {
   const [user, setUser] = useState({ username: "", pass: "" });
   const [head, setHead] = useState("Login");
   const router = useRouter();
+  const [state, dispatch] = InfoProvider();
+
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
@@ -18,7 +21,16 @@ const Login = () => {
       });
       //TODO: Implement useReducer and add data to the data-layer
       loginData.isPass
-        ? router.push("/")
+        ? (async () => {
+            const { data: userStuff } = await axiosInit.post(
+              "/user/user-data",
+              {
+                userId: user.username,
+              }
+            );
+            dispatch({ type: "USER_LOGIN", user: { ...userStuff.data[0] } });
+            router.push("/");
+          })()
         : (() => {
             setUser({ username: "", pass: "" });
             setHead("Error");

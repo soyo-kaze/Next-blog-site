@@ -1,4 +1,4 @@
-/**
+/*
  * TODO: Implement user access commands
  * - get user by userName
  * - authorize user
@@ -62,11 +62,17 @@ export default class UsersDB {
         });
         return { success: true };
       } catch (e) {
-        if (String(e).startsWith("MongoError: E11000 duplicate key error")) {
-          return { error: "A user with the given userName already exists." };
+        if (String(e).includes("E11000")) {
+          return {
+            success: false,
+            message: "A user with the given userName already exists.",
+          };
         }
         // console.error(`Error occurred while adding new user, ${e}.`);
-        return { success: false, message: "Username already exists" };
+        return {
+          success: false,
+          message: "Some Error occured please Try again later!! " + e,
+        };
       }
     } else {
       return { success: false, message: "Internal Error" };

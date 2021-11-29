@@ -37,7 +37,7 @@ const Home = () => {
       }
     }
     setNewKey(keyNewArr);
-    console.log("hello");
+    // console.log("hello");
   }, [blogData]);
 
   //sets data
@@ -54,8 +54,11 @@ const Home = () => {
       <span className="flex  justify-center items-center p-10">
         {blogData.length !== 0 ? (
           <span className="flex flex-col items-center justify-center space-y-4 md:space-x-4 md:space-y-6">
-            {newKey.map((a) => (
-              <span className="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-x-4 md:space-y-0">
+            {newKey.map((a, x) => (
+              <span
+                key={x}
+                className="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-x-4 md:space-y-0"
+              >
                 {a.map((data, x) => (
                   <BlogCard
                     id={data.id}
