@@ -6,7 +6,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/router";
 import { InfoProvider } from "../components/dataContext";
 const axiosInit = axios.create({
-  baseURL: "http://localhost:8000",
+  baseURL: "https://sheltered-hollows-40615.herokuapp.com/",
 });
 
 const Login = () => {
