@@ -1,6 +1,8 @@
 import { useState } from "react";
 import Head from "next/head";
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/router";
 const axiosInit = axios.create({
   baseURL: "https://sheltered-hollows-40615.herokuapp.com/",
@@ -9,6 +11,15 @@ const axiosInit = axios.create({
 const SignUp = () => {
   const [user, setUser] = useState({ username: "", pass: "", name: "" });
   const router = useRouter();
+  const toastOptions = {
+    position: "top-center",
+    autoClose: 1500,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+  };
 
   const handleForm = async (e) => {
     e.preventDefault();
@@ -21,18 +32,11 @@ const SignUp = () => {
     });
     if (isAdded.success) {
       console.log("success");
-      toast.success(isAdded.message, {
-        position: "top-right",
-        autoClose: 1500,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
+      toast.success(isAdded.message, toastOptions);
       setTimeout(() => router.push("/"), 1500);
     } else {
-      console.log(`Not Successful. Message: ${isAdded.message}`);
+      toast.warn(isAdded.message, toastOptions);
+      // console.log(`Not Successful. Message: ${isAdded.message}`);
     }
     console.log(isAdded);
   };

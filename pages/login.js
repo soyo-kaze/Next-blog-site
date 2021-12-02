@@ -14,6 +14,15 @@ const Login = () => {
   const [head, setHead] = useState("Login");
   const router = useRouter();
   const [state, dispatch] = InfoProvider();
+  const toastOptions = {
+    position: "top-center",
+    autoClose: 1500,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+  };
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -32,43 +41,19 @@ const Login = () => {
               }
             );
             dispatch({ type: "USER_LOGIN", user: { ...userStuff.data[0] } });
-            toast.success(loginData.message, {
-              position: "top-right",
-              autoClose: 2000,
-              hideProgressBar: false,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: true,
-              progress: undefined,
-            });
-            setTimeout(() => router.push("/"), 4000);
+            toast.success(loginData.message, toastOptions);
+            setTimeout(() => router.push("/"), 2500);
             // router.push("/");
           })()
         : (() => {
             setUser({ username: "", pass: "" });
-            toast.warn(loginData.message, {
-              position: "top-right",
-              autoClose: 2000,
-              hideProgressBar: false,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: true,
-              progress: undefined,
-            });
+            toast.warn(loginData.message, toastOptions);
             // setHead("Error");
           })();
     } catch (e) {
       //TODO: Implement toastify
       // setHead("Error");
-      toast.error(e, {
-        position: "top-right",
-        autoClose: 2000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
+      toast.error(e.message, toastOptions);
       // console.error(`Error: ${e}`);
     }
   };

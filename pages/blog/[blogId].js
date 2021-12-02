@@ -55,7 +55,7 @@ const Blog = () => {
             <title>{data.author}</title>
           </Head>
           <div class="p-6 pt-14 md:pl-96  md:pr-96">
-            <p class="font-semibold text-6xl mb-4">{data.title}</p>
+            <p class="mt-10 font-semibold text-6xl mb-4">{data.title}</p>
             <hr className="text-gray-200"></hr>
             <p class="italic text-gray-500 mt-4 font-semibold text-lg">
               {data.author}
