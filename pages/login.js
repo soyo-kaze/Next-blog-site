@@ -1,9 +1,12 @@
 import React, { useState } from "react";
+import Head from "next/head";
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/router";
 import { InfoProvider } from "../components/dataContext";
 const axiosInit = axios.create({
-  baseURL: "https://sheltered-hollows-40615.herokuapp.com/",
+  baseURL: "http://localhost:8000",
 });
 
 const Login = () => {
@@ -29,21 +32,53 @@ const Login = () => {
               }
             );
             dispatch({ type: "USER_LOGIN", user: { ...userStuff.data[0] } });
-            router.push("/");
+            toast.success(loginData.message, {
+              position: "top-right",
+              autoClose: 2000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+            });
+            setTimeout(() => router.push("/"), 4000);
+            // router.push("/");
           })()
         : (() => {
             setUser({ username: "", pass: "" });
-            setHead("Error");
+            toast.warn(loginData.message, {
+              position: "top-right",
+              autoClose: 2000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+            });
+            // setHead("Error");
           })();
     } catch (e) {
       //TODO: Implement toastify
-      setHead("Error");
-      console.error(`Error: ${e}`);
+      // setHead("Error");
+      toast.error(e, {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      // console.error(`Error: ${e}`);
     }
   };
   return (
     <>
+      <Head>
+        <title>Login</title>
+      </Head>
       <div className="flex h-screen justify-center items-center pl-4 pr-4">
+        <ToastContainer />
         <div className="p-6 max-w-md flex-col space-y-10 w-full border-2 h-[400px] rounded-md shadow-lg border-gray-300 flex justify-center items-center">
           <p className="text-[40px] font-bold">{head}</p>
           <form

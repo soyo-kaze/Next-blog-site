@@ -2,6 +2,7 @@ import BlogCard from "../components/blogCard";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import Head from "next/head";
 import { InfoProvider } from "../components/dataContext";
 
 const axiosInit = axios.create({
@@ -47,6 +48,9 @@ const Home = () => {
 
   return (
     <>
+      <Head>
+        <title>Home</title>
+      </Head>
       <div className="h-[60px]"></div>
       <div className="flex justify-center items-center font-bold text-[40px] m-4">
         {`Welcome to the Blog`}

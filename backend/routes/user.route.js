@@ -18,11 +18,11 @@ router.route("/user-data").post(async (req, res) => {
 router.route("/login").post(async (req, res) => {
   try {
     let data = await UsersDB.compareUserPass(req.body.userId);
-    // console.log(data);
-    data = { data };
-    let password = data.data[0].password ? data.data[0].password : false;
+    console.log(data.length);
+    // data = { data };
+    let password = data.length != 0 ? data[0].password : false;
     if (!password) {
-      res.status(404).send({
+      res.send({
         isPass: false,
         message: "User Not Found",
       });

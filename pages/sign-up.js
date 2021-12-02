@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Head from "next/head";
 import axios from "axios";
 import { useRouter } from "next/router";
 const axiosInit = axios.create({
@@ -20,7 +21,16 @@ const SignUp = () => {
     });
     if (isAdded.success) {
       console.log("success");
-      router.push("/");
+      toast.success(isAdded.message, {
+        position: "top-right",
+        autoClose: 1500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      setTimeout(() => router.push("/"), 1500);
     } else {
       console.log(`Not Successful. Message: ${isAdded.message}`);
     }
@@ -28,6 +38,20 @@ const SignUp = () => {
   };
   return (
     <>
+      <Head>
+        <title>SignUp</title>
+      </Head>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
       <div className="flex h-screen justify-center items-center pl-4 pr-4">
         <div className="p-6 max-w-md flex-col space-y-10 w-full border-2 rounded-md shadow-lg border-gray-300 flex justify-center items-center">
           <p className="text-[40px] font-bold">Register</p>
