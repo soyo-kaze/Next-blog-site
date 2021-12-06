@@ -7,6 +7,7 @@ module.exports = {
       "external-content.duckduckgo.com",
       "media1.tenor.com",
       "c.tenor.com",
+      "https://unsplash.com/",
     ],
   },
 };

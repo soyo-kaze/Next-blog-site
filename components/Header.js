@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { useEffect } from "react";
+import { unstable_renderSubtreeIntoContainer } from "react-dom";
 import { InfoProvider } from "./dataContext";
 
 const Header = () => {
@@ -7,13 +8,18 @@ const Header = () => {
   const handleSignOut = () => {
     dispatch({ type: "USER_LOGOUT" });
   };
+  useEffect(() => {
+    console.log(state.user ? state.user._id : "");
+  }, [state]);
   return (
     <>
       <div className="p-4 w-full fixed flex items-center justify-between bg-gray-200 z-20">
         <Link href="/">
           <div className="cursor-pointer">BlogSite</div>
         </Link>
-        <p>{state.user ? state.user.name : ""}</p>
+        <Link href={state.user ? `u/${state.user._id}` : ""}>
+          <p className="cursor-pointer">{state.user ? state.user.name : ""}</p>
+        </Link>
         <div className="flex space-x-2">
           <Link href={!state.user ? "/login" : ""}>
             <span
