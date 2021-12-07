@@ -17,7 +17,7 @@ const Header = () => {
         <Link href="/">
           <div className="cursor-pointer">BlogSite</div>
         </Link>
-        <Link href={state.user ? `u/${state.user._id}` : ""}>
+        <Link href={state.user ? `/u/${state.user._id}` : ""}>
           <p className="cursor-pointer">{state.user ? state.user.name : ""}</p>
         </Link>
         <div className="flex space-x-2">

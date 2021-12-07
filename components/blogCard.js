@@ -8,7 +8,7 @@ const BlogCard = ({ id, title, smallDes, img, author }) => {
         src={img}
         width="1920"
         height="1080"
-        className="object-contain max-w-md rounded-t-md"
+        className="object-cover max-w-md rounded-t-md"
       />
       <span id="card_info" className="flex flex-col p-5 space-y-2">
         <span className="font-bold text-sm">{title}</span>
