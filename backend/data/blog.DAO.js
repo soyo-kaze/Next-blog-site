@@ -37,4 +37,6 @@ export default class BlogDB {
     }
     return cursor.toArray();
   }
+
+  //TODO: Implement add blogs to the DB. addBlog(data: JSON)
 }
