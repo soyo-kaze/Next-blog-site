@@ -23,6 +23,37 @@ const handleApi = async (id, action) => {
   //Request for blog data via post verb and attaching id of the desired content
 };
 
+export const BlogSpace = ({ data, setData }) => {
+  //to Reuse in live preview
+  return (
+    <div class="p-6 ">
+      <p class="mt-10 font-semibold text-6xl mb-4">{data.title}</p>
+      <hr className="text-gray-200"></hr>
+      <p class="italic text-gray-500 mt-4 font-semibold text-lg">
+        {data.author}
+      </p>
+      <span class="flex items-center w-full h-full max-w-6xl justify-center mt-10">
+        <Image
+          class="w-full object-contain"
+          src={data.imgUrl}
+          alt="Invalid Image Url or failed to load it." // ⚠ Incase the url is not valid or empty
+          width="1920"
+          height="1080"
+          onError={() => setData({ ...data, imgUrl: "/" })}
+        />
+      </span>
+      <p class="mt-10">{data.thePara}</p>
+      <span class="w-full flex  items-center justify-center mt-4">
+        <Link href="/">
+          <button class="mt-4 p-2 bg-green-500 rounded-md hover:bg-green-600 text-white font-semibold w-24">
+            Home
+          </button>
+        </Link>
+      </span>
+    </div>
+  );
+};
+
 const Blog = () => {
   const router = useRouter();
   const [data, setData] = useState();
@@ -54,29 +85,8 @@ const Blog = () => {
           <Head>
             <title>{data.author}</title>
           </Head>
-          <div class="p-6 pt-14 md:pl-96  md:pr-96">
-            <p class="mt-10 font-semibold text-6xl mb-4">{data.title}</p>
-            <hr className="text-gray-200"></hr>
-            <p class="italic text-gray-500 mt-4 font-semibold text-lg">
-              {data.author}
-            </p>
-            <span class="flex items-center w-full max-w-6xl justify-center mt-10">
-              <Image
-                class="w-full object-contain"
-                src={data.imgUrl}
-                alt="Roymen Sukuna"
-                width="1920"
-                height="1080"
-              />
-            </span>
-            <p class="mt-10">{data.thePara}</p>
-            <span class="w-full flex  items-center justify-center mt-4">
-              <Link href="/">
-                <button class="mt-4 p-2 bg-green-500 rounded-md hover:bg-green-600 text-white font-semibold w-24">
-                  Home
-                </button>
-              </Link>
-            </span>
+          <div className="pt-14 md:pl-96 md:pr-96">
+            <BlogSpace data={data} setData={setData} />
           </div>
         </>
       )}
