@@ -23,22 +23,26 @@ const SignUp = () => {
 
   const handleForm = async (e) => {
     e.preventDefault();
-    const {
-      data: { data: isAdded },
-    } = await axiosInit.post("/user/add-user", {
-      name: user.name,
-      _id: user.username,
-      password: user.pass,
-    });
-    if (isAdded.success) {
-      console.log("success");
-      toast.success(isAdded.message, toastOptions);
-      setTimeout(() => router.push("/"), 1500);
-    } else {
-      toast.warn(isAdded.message, toastOptions);
-      // console.log(`Not Successful. Message: ${isAdded.message}`);
+    try {
+      const {
+        data: { data: isAdded },
+      } = await axiosInit.post("/user/add-user", {
+        name: user.name,
+        _id: user.username,
+        password: user.pass,
+      });
+      if (isAdded.success) {
+        console.log("success");
+        toast.success(isAdded.message, toastOptions);
+        setTimeout(() => router.push("/"), 1500);
+      } else {
+        toast.warn(isAdded.message, toastOptions);
+        // console.log(`Not Successful. Message: ${isAdded.message}`);
+      }
+      console.log(isAdded);
+    } catch (e) {
+      toast.error(e.message, toastOptions);
     }
-    console.log(isAdded);
   };
   return (
     <>
