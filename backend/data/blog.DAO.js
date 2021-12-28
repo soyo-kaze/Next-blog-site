@@ -41,7 +41,7 @@ export default class BlogDB {
     return cursor.toArray();
   }
 
-  //TODO: Implement add blogs to the DB. addBlog(data: JSON)
+  //TODO: Implement add blogs to the DB. addBlog(data: JSON) [✅Done]
   static async addBlog(data) {
     let cursor;
     try {
@@ -56,4 +56,7 @@ export default class BlogDB {
       };
     }
   }
+
+  //TODO: Implement get blogs by username
+  //TODO: Implement delete blog
 }

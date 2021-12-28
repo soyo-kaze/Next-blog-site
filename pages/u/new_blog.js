@@ -36,7 +36,7 @@ const NewBlog = () => {
       });
       if (isAdded.success) {
         toast.success(isAdded.message, toastOptions);
-        setTimeout(() => router.push("/"), 1500);
+        setTimeout(() => router.push(`/u/${data.userName}`), 1500);
       } else {
         toast.warn(isAdded.message, toastOptions);
       }
