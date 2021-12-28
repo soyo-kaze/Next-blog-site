@@ -2,16 +2,49 @@ import { InfoProvider } from "../../components/dataContext";
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { BlogSpace } from "../blog/[blogId]";
+import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+const BASE_URL = "https://sheltered-hollows-40615.herokuapp.com/";
 
-const handlePostApi = async (e, data, setSuccess, isSuccess) => {
-  e.preventDefault();
-  console.log(data);
+const axiosInit = axios.create({
+  baseURL: BASE_URL,
+});
+
+const toastOptions = {
+  position: "top-center",
+  autoClose: 1500,
+  hideProgressBar: false,
+  closeOnClick: true,
+  pauseOnHover: true,
+  draggable: true,
+  progress: undefined,
 };
 
 const NewBlog = () => {
   const [state, dispatch] = InfoProvider();
   const [isSuccess, setSuccess] = useState(false);
   const router = useRouter();
+  const handlePostApi = async (e, data, setSuccess, isSuccess) => {
+    e.preventDefault();
+    data = { ...data, time: new Date(Date.now()) };
+    try {
+      const {
+        data: { data: isAdded },
+      } = await axiosInit.post("/blog/add-blog", {
+        ...data,
+      });
+      if (isAdded.success) {
+        toast.success(isAdded.message, toastOptions);
+        setTimeout(() => router.push("/"), 1500);
+      } else {
+        toast.warn(isAdded.message, toastOptions);
+      }
+    } catch (e) {
+      toast.error(e.message, toastOptions);
+    }
+    console.log(data);
+  };
   const [data, setData] = useState({
     time: "",
     thePara: "",
@@ -28,13 +61,24 @@ const NewBlog = () => {
     // console.log(bg.src);
     // const id = router.query.userId;
     if (state.user == null) {
-      // router.replace("/");
+      router.replace("/");
     } else {
-      setData({ ...data, userName: state.user.name });
+      setData({ ...data, userName: state.user["_id"] });
     }
   }, [state]);
   return (
     <>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
       <div className="h-[60px]"></div>
 
       {/*
@@ -64,7 +108,12 @@ const NewBlog = () => {
           </div>
           <BlogSpace data={data} />
         </div>
-        <form className="flex mb-10 flex-col space-y-4 p-10 mt-10 border items-center justify-center border-gray-400 rounded-md max-w-[400px] w-full">
+        <form
+          onSubmit={(e) => {
+            handlePostApi(e, data, setSuccess, isSuccess);
+          }}
+          className="flex mb-10 flex-col space-y-4 p-10 mt-10 border items-center justify-center border-gray-400 rounded-md max-w-[400px] w-full"
+        >
           <input
             type="url"
             value={data.imgUrl}
@@ -78,6 +127,7 @@ const NewBlog = () => {
           <input
             type="text"
             value={data.title}
+            required
             onChange={(event) => {
               setData({ ...data, title: `${event.target.value}` });
             }}
@@ -87,6 +137,7 @@ const NewBlog = () => {
           <input
             type="text"
             value={data.author}
+            required
             onChange={(event) => {
               setData({ ...data, author: `${event.target.value}` });
             }}
@@ -94,8 +145,9 @@ const NewBlog = () => {
             className="input__tags"
           />
           <textarea
-            col="2"
+            rows="2"
             value={data.smallDes}
+            required
             onChange={(event) => {
               setData({ ...data, smallDes: `${event.target.value}` });
             }}
@@ -103,30 +155,27 @@ const NewBlog = () => {
             className="input__tags"
           />
           <textarea
-            col="6"
+            rows="6"
             value={data.thePara}
+            required
             onChange={(event) => {
               setData({ ...data, thePara: `${event.target.value}` });
             }}
             placeholder="Write your para here!!"
             className="input__tags"
           />
-          <input
+          {/* <input
             type="text"
             value={data.id}
+            required
             onChange={(event) => {
               setData({ ...data, id: `${event.target.value}` });
             }}
             placeholder="UID"
             className="input__tags"
-          />
+          /> */}
           <span>
-            <button
-              className="mt-4 p-2 bg-green-500 rounded-md hover:bg-green-600 text-white font-semibold w-24"
-              onClick={(e) => {
-                handlePostApi(e, data, setSuccess, isSuccess);
-              }}
-            >
+            <button className="mt-4 p-2 bg-green-500 rounded-md hover:bg-green-600 text-white font-semibold w-24">
               Submit
             </button>
           </span>

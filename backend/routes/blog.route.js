@@ -28,4 +28,14 @@ router
     }
   });
 
+router.route("/add-blog").post(async (req, res) => {
+  try {
+    let data = await BlogDB.addBlog(req.body);
+    data = { data };
+    res.send(data);
+  } catch (e) {
+    res.status(500).send(`Error occurred ${e}`);
+  }
+});
+
 export default router;

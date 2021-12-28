@@ -42,4 +42,18 @@ export default class BlogDB {
   }
 
   //TODO: Implement add blogs to the DB. addBlog(data: JSON)
+  static async addBlog(data) {
+    let cursor;
+    try {
+      cursor = await blogData.insertOne({
+        ...data,
+      });
+      return { success: true, message: "Blog added successfully" };
+    } catch (e) {
+      return {
+        success: false,
+        message: "Some Error occured please Try again later!! " + e,
+      };
+    }
+  }
 }

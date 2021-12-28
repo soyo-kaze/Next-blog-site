@@ -36,7 +36,7 @@ export const BlogSpace = ({ data, setData }) => {
       </p>
       <span class="flex items-center w-full h-full max-w-6xl justify-center mt-10">
         <Image
-          class="w-full object-cover"
+          class="w-full object-contain"
           src={data.imgUrl}
           alt="Invalid Image Url or failed to load it." // ⚠ Incase the url is not valid or empty
           width="1920"
