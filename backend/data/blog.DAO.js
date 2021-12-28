@@ -3,6 +3,8 @@ let blogData;
 import dot from "dotenv";
 dot.config();
 
+import { ObjectId } from "mongodb";
+
 export default class BlogDB {
   static async injectDB(client) {
     if (blogDB) {
@@ -30,7 +32,8 @@ export default class BlogDB {
   static async getBlogById(id) {
     let cursor;
     try {
-      cursor = await blogData.find({ id: id });
+      console.log(id);
+      cursor = await blogData.find({ _id: ObjectId(id) });
     } catch (e) {
       console.error(`internal error: ${e}`);
       return null;

@@ -4,15 +4,17 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import Head from "next/head";
+const BASE_URL = "https://sheltered-hollows-40615.herokuapp.com/"; // "http://localhost:8000"
 
 const axiosInit = axios.create({
-  baseURL: "https://sheltered-hollows-40615.herokuapp.com/",
+  baseURL: BASE_URL,
 });
 
 const handleApi = async (id, action) => {
   // Promises can also be handled via async await but wrap them into try/catch
   try {
     const { data } = await axiosInit.post("/blog", { id: id });
+    console.log(data);
     action(data.data[0]);
   } catch (e) {
     console.error(
@@ -34,7 +36,7 @@ export const BlogSpace = ({ data, setData }) => {
       </p>
       <span class="flex items-center w-full h-full max-w-6xl justify-center mt-10">
         <Image
-          class="w-full object-contain"
+          class="w-full object-cover"
           src={data.imgUrl}
           alt="Invalid Image Url or failed to load it." // ⚠ Incase the url is not valid or empty
           width="1920"

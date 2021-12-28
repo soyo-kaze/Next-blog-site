@@ -65,7 +65,7 @@ const Home = () => {
               >
                 {a.map((data, x) => (
                   <BlogCard
-                    id={data.id}
+                    id={data["_id"]}
                     title={data.title}
                     smallDes={data.smallDes}
                     author={data.author}
