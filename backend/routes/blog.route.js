@@ -38,4 +38,13 @@ router.route("/add-blog").post(async (req, res) => {
   }
 });
 
+router.route("/user-blog").post(async (req, res) => {
+  try {
+    let data = await BlogDB.getBlogByUser(req.body.userName);
+    res.send(data);
+  } catch (e) {
+    res.status(500).send(`Error occurred ${e}`);
+  }
+});
+
 export default router;

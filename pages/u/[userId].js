@@ -5,19 +5,55 @@ import bg from "../../public/assets/cover.jpg";
 import { InfoProvider } from "../../components/dataContext";
 import BlogCard from "../../components/blogCard";
 import Link from "next/link";
+import axios from "axios";
+
+const axiosInit = axios.create({
+  baseURL: "https://sheltered-hollows-40615.herokuapp.com/",
+});
+
+const handleApi = (action1, req) => {
+  console.log(req);
+  axiosInit
+    .post("/blog/user-blog", req)
+    .then((res) => {
+      action1(res.data);
+    })
+    .catch((err) => console.log(err));
+};
 
 const Dashboard = () => {
   const [id, setId] = useState();
   const [state, dispatch] = InfoProvider();
+  const [blogData, setData] = useState([]);
+  const [newBlogData, setNewData] = useState([]);
   const router = useRouter();
 
   useEffect(() => {
     // console.log(bg.src);
-    // const id = router.query.userId;
+    const newArr = [[]];
+    const keyLen = blogData.length;
+    let key = 0;
+    for (let i = 1; i <= keyLen; i++) {
+      if (i % 2) {
+        newArr[key].push(blogData[i - 1]);
+      } else {
+        newArr[key].push(blogData[i - 1]);
+        newArr.push([]);
+        key++;
+      }
+    }
+    setNewData(newArr);
+    console.log(blogData);
     if (state.user == null) {
       router.replace("/");
     }
-  }, [state]);
+  }, [state, blogData]);
+
+  useEffect(() => {
+    const id = router.query.userId;
+    handleApi(setData, { userName: id });
+  }, []);
+
   return (
     <>
       <div className="pb-4">
@@ -62,21 +98,23 @@ const Dashboard = () => {
               </button>
             </Link>
           </div>
-          <div className="flex w-full flex-col md:flex-row justify-evenly items-center space-x-0 space-y-10 md:space-y-0 md:space-x-10 pl-4 pr-4 md:pl-10">
-            <BlogCard
-              id="Gojo_God"
-              title="weathering with you"
-              smallDes="Satoru Gojo (五条悟 Gojō Satoru?) is one of the main protagonists of Jujutsu Kaisen. He is a special grade jujutsu sorcerer and a teacher at the Tokyo Jujutsu High. "
-              author="Gojo"
-              img="/assets/1052807.png"
-            />
-            <BlogCard
-              id="Gojo_God"
-              title="weathering with you"
-              smallDes="Satoru Gojo (五条悟 Gojō Satoru?) is one of the main protagonists of Jujutsu Kaisen. He is a special grade jujutsu sorcerer and a teacher at the Tokyo Jujutsu High. "
-              author="Gojo"
-              img="/assets/cover.jpg"
-            />
+          <div className="flex w-full flex-col justify-center items-center space-x-0 space-y-10 md:space-y-10 md:space-x-10 pl-4 pr-4 md:pl-10">
+            {newBlogData.map((a, x) => (
+              <span
+                key={x}
+                className="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-x-4 md:space-y-0"
+              >
+                {a.map((data, x) => (
+                  <BlogCard
+                    id={data["_id"]}
+                    title={data.title}
+                    smallDes={data.smallDes}
+                    author={data.author}
+                    img={data.imgUrl}
+                  />
+                ))}
+              </span>
+            ))}
           </div>
         </div>
       </div>

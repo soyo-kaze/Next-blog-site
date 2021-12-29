@@ -58,5 +58,16 @@ export default class BlogDB {
   }
 
   //TODO: Implement get blogs by username
+  static async getBlogByUser(userName) {
+    let cursor;
+    try {
+      cursor = await blogData.find({ userName: userName }).sort({ time: -1 });
+      console.log(userName);
+    } catch (e) {
+      console.error(`internal error: ${e}`);
+      return null;
+    }
+    return cursor.toArray();
+  }
   //TODO: Implement delete blog
 }
