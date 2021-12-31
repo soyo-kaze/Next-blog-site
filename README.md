@@ -8,3 +8,7 @@ Blog site for practicing full-stack
 - Next.js
 - Node.js
 - TailwindCSS
+
+### Test Login
+- **ID:** `soyokaze`
+- **Pass:** `abc123`
