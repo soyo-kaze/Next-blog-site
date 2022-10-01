@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, ReactNode } from "react";
 import Head from "next/head";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
@@ -7,6 +7,12 @@ import { useRouter } from "next/router";
 const axiosInit = axios.create({
   baseURL: "https://sheltered-hollows-40615.herokuapp.com/",
 });
+
+/**
+ * This component renders signup page and handles sign-up functionality
+ *
+ * @returns {ReactNode} component
+ */
 
 const SignUp = () => {
   const [user, setUser] = useState({ username: "", pass: "", name: "" });
