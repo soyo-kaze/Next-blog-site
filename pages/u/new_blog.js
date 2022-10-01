@@ -96,10 +96,6 @@ const NewBlog = () => {
           
       */}
       <div className="pt-4 flex justify-evenly min-h-screen items-center w-full p-24 space-x-10">
-        {/*
-          - Live preview component 
-          - Reused component from /blog/[blogId].js
-        */}
         <div className="max-w-2xl flex  justify-center flex-col mt-10">
           <div className="border flex text-red-500 items-center -mb-9 justify-center border-red-500 rounded-md w-max p-2">
             {" "}
