@@ -1,6 +1,6 @@
 # Create a new Issue
 - Click on the "New issue" button </br>
- <img src="./public/images/create_issue.png" /> 
+ <img src="./public/assets/create_issue.png" /> 
 
 - Give a suitable title regarding the issue like "Update Readme.md", "Replace React context API with Redux", etc.
 
@@ -10,10 +10,10 @@
 # How to start with open source and raise your 1st PR
 
 - fork the repository <br />
-  <br /><img src = "./public/images/fork.png" /> <br />
+  <br /><img src = "./public/assets/fork.png" /> <br />
 
 - clone the repository using Git command <br />
-  <br/> <img src="./public/images/clone.png" /> <br/>
+  <br/> <img src="./public/assets/clone.png" /> <br/>
   &nbsp; git clone https://github.com/{github_username}/Next-blog-site.git
 - move to the newly created folder using
   Git command <br />
@@ -32,9 +32,9 @@
 
 ## Raising Your 1st PR <br/>
 
-- After pushing your code, go to the forked repository. There you will see change like this. <br />
- <br><img src="./public/images/pullreq.png"/>
+- After pushing your code, go to the forked repository. There you will see a section like this. <br />
+ <br><img src="./public/assets/pullreq.png"/>
 
 - click on compare and pull request. Such page will appear. Write meaningfull message and title which describes your changes (title should contain the issue number which you can see beside the title of issue)<br/>
-<br/> <img src="./public/images/PR.png"/>
+<br/> <img src="./public/assets/PR.png"/>
 - click on create pull request. <br/>
