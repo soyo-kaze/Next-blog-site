@@ -22,7 +22,7 @@
 - Make a new branch (always name your branch related to your issue) and then make the changes.<br/> To make a new branch, use Git Command
    <br/> &nbsp; ```git checkout -b {new branch name}```
    
-- Open folder in your text editor maually or write command <br> ```code .```
+- Open folder in your text editor maually or write command <br> &nbsp;```code .```
 
 - Check your changes using Git Command
 <br/> &nbsp; ```git status```
