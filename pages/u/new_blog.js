@@ -1,10 +1,11 @@
-import { InfoProvider } from "../../components/dataContext";
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { BlogSpace } from "../blog/[blogId]";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useSelector } from "react-redux";
+import { userState } from "../../store/authSlice";
 const BASE_URL = "https://sheltered-hollows-40615.herokuapp.com/";
 
 const axiosInit = axios.create({
@@ -22,7 +23,8 @@ const toastOptions = {
 };
 
 const NewBlog = () => {
-  const [state, dispatch] = InfoProvider();
+  const state = useSelector(userState)
+
   const [isSuccess, setSuccess] = useState(false);
   const router = useRouter();
   const handlePostApi = async (e, data, setSuccess, isSuccess) => {
@@ -60,7 +62,7 @@ const NewBlog = () => {
   useEffect(() => {
     // console.log(bg.src);
     // const id = router.query.userId;
-    if (state.user == null) {
+    if (Object.keys(state.user).length == 0) {
       router.replace("/");
     } else {
       setData({ ...data, userName: state.user["_id"] });
