@@ -2,10 +2,11 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import bg from "../../public/assets/cover.jpg";
-import { InfoProvider } from "../../components/dataContext";
 import BlogCard from "../../components/blogCard";
 import Link from "next/link";
 import axios from "axios";
+import { useSelector } from "react-redux";
+import { userState } from "../../store/authSlice";
 
 const axiosInit = axios.create({
   baseURL: "https://sheltered-hollows-40615.herokuapp.com/",
@@ -23,7 +24,7 @@ const handleApi = (action1, req) => {
 
 const Dashboard = () => {
   const [id, setId] = useState();
-  const [state, dispatch] = InfoProvider();
+  const state = useSelector(userState)
   const [blogData, setData] = useState([]);
   const [newBlogData, setNewData] = useState([]);
   const router = useRouter();
@@ -44,7 +45,7 @@ const Dashboard = () => {
     }
     setNewData(newArr);
     console.log(blogData);
-    if (state.user == null) {
+    if (Object.keys(state.user).length == 0) {
       router.replace("/");
     }
   }, [state, blogData]);
@@ -82,7 +83,7 @@ const Dashboard = () => {
           <div className="max-w-[300px] w-full flex flex-col items-center justify-center">
             <div className="border-gray-800 flex flex-col h-full justify-center items-center border-2 mt-10 rounded-3xl w-full max-w-[300px] p-6">
               <p className="font-semibold text-[30px]">
-                {state.user ? state.user.name : "User Name"}
+                {Object.keys(state.user).length !== 0 ? state.user.name : "User Name"}
               </p>
               <span className="mt-2 text-[13px]">
                 <p>

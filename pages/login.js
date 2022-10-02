@@ -4,7 +4,8 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/router";
-import { InfoProvider } from "../components/dataContext";
+import { useDispatch } from "react-redux";
+import { setAuthState } from "../store/authSlice";
 const axiosInit = axios.create({
   baseURL: "https://sheltered-hollows-40615.herokuapp.com/",
 });
@@ -13,7 +14,7 @@ const Login = () => {
   const [user, setUser] = useState({ username: "", pass: "" });
   const [head, setHead] = useState("Login");
   const router = useRouter();
-  const [state, dispatch] = InfoProvider();
+  const dispatch = useDispatch()
   const toastOptions = {
     position: "top-center",
     autoClose: 1500,
@@ -40,7 +41,8 @@ const Login = () => {
                 userId: user.username,
               }
             );
-            dispatch({ type: "USER_LOGIN", user: { ...userStuff.data[0] } });
+
+            dispatch(setAuthState({ type: "USER_LOGIN", user: { ...userStuff.data[0] } }));
             toast.success(loginData.message, toastOptions);
             setTimeout(() => router.push("/"), 2500);
             // router.push("/");

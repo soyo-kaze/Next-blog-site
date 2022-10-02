@@ -1,38 +1,46 @@
 import Link from "next/link";
 import { useEffect } from "react";
 import { unstable_renderSubtreeIntoContainer } from "react-dom";
-import { InfoProvider } from "./dataContext";
+import { useSelector,useDispatch } from "react-redux";
+import { userState,setAuthState } from "../store/authSlice";
 
 const Header = () => {
-  const [state, dispatch] = InfoProvider();
+
+  const state = useSelector(userState)
+
+  const dispatch = useDispatch();
+
   const handleSignOut = () => {
-    dispatch({ type: "USER_LOGOUT" });
+    console.log("Hi I am called")
+    dispatch(setAuthState({ type: "USER_LOGOUT" }));
   };
+
   useEffect(() => {
-    console.log(state.user ? state.user._id : "");
+    console.log(Object.keys(state.user).length == 0 ? state.user._id : "");
   }, [state]);
+
   return (
     <>
       <div className="p-4 w-full fixed flex items-center justify-between bg-gray-200 z-20">
         <Link href="/">
           <div className="cursor-pointer">BlogSite</div>
         </Link>
-        <Link href={state.user ? `/u/${state.user._id}` : ""}>
-          <p className="cursor-pointer">{state.user ? state.user.name : ""}</p>
+        <Link href={Object.keys(state.user).length !== 0 ? `/u/${state.user._id}` : ""}>
+          <p className="cursor-pointer">{Object.keys(state.user).length !== 0 ? state.user.name : ""}</p>
         </Link>
         <div className="flex space-x-2">
-          <Link href={!state.user ? "/login" : ""}>
+          <Link href={Object.keys(state.user).length == 0 ? "/login" : ""}>
             <span
               className="p-2 cursor-pointer text-white bg-green-500 rounded-md"
               onClick={handleSignOut}
             >
-              {!state.user ? "Login" : "Logout"}
+              {Object.keys(state.user).length == 0 ? "Login" : "Logout"}
             </span>
           </Link>
           <Link href="/sign-up">
             <span
               className="p-2 cursor-pointer text-white bg-blue-500 rounded-md"
-              hidden={state.user == null ? false : true}
+              hidden={Object.keys(state.user).length == 0 ? false : true}
             >
               SignUp
             </span>

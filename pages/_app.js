@@ -1,15 +1,14 @@
 import "../public/styles/global.css";
-import { DataProvider } from "../components/dataContext";
+// import { DataProvider } from "../components/dataContext";
 import Layout from "../components/Layout";
+import { wrapper } from "../store/store";
 
 const MyApp = ({ Component, pageProps }) => {
   return (
-    <DataProvider>
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
-    </DataProvider>
+    <Layout>
+      <Component {...pageProps} />
+    </Layout>
   );
 };
 
-export default MyApp;
+export default wrapper.withRedux(MyApp);
