@@ -41,6 +41,6 @@
 - After pushing your code, go to the forked repository. There you will see a section like this. <br/>
  <br><img src="./public/assets/pullreq.png"/>
 
-- Click on "Compare and pull request". Such page will appear. Write meaningful message and title which describes your changes (title should contain the issue number which you can see beside the title of issue)<br/>
+- Click on "Compare & pull request". Such page will appear. Write meaningful message and title which describes your changes (title should contain the issue number which you can see beside the title of issue)<br/>
 <br/> <img src="./public/assets/PR.png"/>
 - Click on "Create pull request." <br/>
