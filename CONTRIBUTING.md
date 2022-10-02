@@ -6,7 +6,7 @@
 
 - Describe your issue. If you think there is need of any image for better explanation, attach image too.
 
-- Then briefly explain what are going to do to solve the issue.
+- Then briefly explain what you are going to do to solve the issue.
 # How to start with open source and raise your 1st PR
 
 - fork the repository <br />
@@ -35,6 +35,6 @@
 - After pushing your code, go to the forked repository. There you will see a section like this. <br />
  <br><img src="./public/assets/pullreq.png"/>
 
-- click on compare and pull request. Such page will appear. Write meaningfull message and title which describes your changes (title should contain the issue number which you can see beside the title of issue)<br/>
+- click on compare and pull request. Such page will appear. Write meaningful message and title which describes your changes (title should contain the issue number which you can see beside the title of issue)<br/>
 <br/> <img src="./public/assets/PR.png"/>
 - click on create pull request. <br/>
