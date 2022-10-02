@@ -22,7 +22,7 @@
 - Make a new branch (always name your branch related to your issue) and then make the changes.<br/> To make a new branch, use Git Command
    <br/> &nbsp; ```git checkout -b {new branch name}```
    
-- Open folder in your text editor maually or write command <br> &nbsp;```code .```
+- Open folder in your text editor maually or write command <br /> &nbsp;```code .```
 
 - Check your changes using Git Command
 <br/> &nbsp; ```git status```
@@ -41,6 +41,6 @@
 - After pushing your code, go to the forked repository. There you will see a section like this. <br/>
  <br><img src="./public/assets/pullreq.png"/>
 
-- Click on compare and pull request. Such page will appear. Write meaningful message and title which describes your changes (title should contain the issue number which you can see beside the title of issue)<br/>
+- Click on "Compare and pull request". Such page will appear. Write meaningful message and title which describes your changes (title should contain the issue number which you can see beside the title of issue)<br/>
 <br/> <img src="./public/assets/PR.png"/>
-- Click on create pull request. <br/>
+- Click on "Create pull request." <br/>
